@@ -1,24 +1,55 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VTuber Indonesia 🇮🇩</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-
-  <header>
+<body>  <header>
     <h1>🇮🇩 Daftar VTuber Indonesia</h1>
-    <input type="text" id="searchInput" placeholder="Cari VTuber...">
-  </header>
-
-  <main id="vtuberList"></main>
-
-  <footer>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Cari VTuber...">
+      <button id="searchBtn">🔍 Cari</button>
+    </div>
+  </header>  <main id="vtuberList"></main>  <footer>
     <p>✨ Data dari <a href="https://holodex.net" target="_blank">Holodex API</a></p>
-  </footer>
+  </footer>  <script>
+    const container = document.getElementById("vtuberList");
+    const input = document.getElementById("searchInput");
+    const searchBtn = document.getElementById("searchBtn");
+    let vtubers = [];
 
-  <script src="script.js"></script>
-</body>
+    fetch("https://holodex.net/api/v2/channels?lang=id&limit=100")
+      .then(res => res.json())
+      .then(data => {
+        vtubers = data;
+        renderList(vtubers);
+      })
+      .catch(() => {
+        container.innerHTML = "<p style='color:red;'>Gagal memuat data dari Holodex 😢</p>";
+      });
+
+    function renderList(list) {
+      container.innerHTML = list.map(v => `
+        <div class="vtuber-card">
+          <img src="${v.photo}" alt="${v.name}" />
+          <h3>${v.name}</h3>
+          <p>Agensi: ${v.org ?? 'Indie'}</p>
+          <a href="https://www.youtube.com/channel/${v.id}" target="_blank">📺 Lihat Channel</a>
+        </div>
+      `).join('');
+    }
+
+    function performSearch() {
+      const keyword = input.value.toLowerCase();
+      const filtered = vtubers.filter(v =>
+        v.name.toLowerCase().includes(keyword) ||
+        (v.org ?? '').toLowerCase().includes(keyword)
+      );
+      renderList(filtered);
+    }
+
+    input.addEventListener("input", performSearch);
+    searchBtn.addEventListener("click", performSearch);
+  </script></body>
 </html>
