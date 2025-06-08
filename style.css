@@ -1,0 +1,100 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #121212;
+  color: white;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: #1e1e1e;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+header h1 {
+  font-size: 2rem;
+  color: #90caf9;
+  margin-bottom: 1rem;
+}
+
+#searchInput {
+  padding: 0.8rem;
+  width: 80%;
+  max-width: 400px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #2c2c2c;
+  color: #fff;
+  outline: none;
+}
+
+/* Main Grid */
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+/* VTuber Card */
+.vtuber-card {
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+  transition: transform 0.2s ease;
+  text-align: center;
+  padding: 1rem;
+}
+
+.vtuber-card:hover {
+  transform: scale(1.03);
+}
+
+.vtuber-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.7rem;
+}
+
+.vtuber-card h3 {
+  font-size: 1.1rem;
+  margin: 0.3rem 0;
+}
+
+.vtuber-card p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.vtuber-card a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #90caf9;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.vtuber-card a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  background: #1f1f1f;
+  color: #aaa;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
